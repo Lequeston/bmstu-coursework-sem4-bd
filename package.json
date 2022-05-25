@@ -1,0 +1,33 @@
+{
+  "name": "bmstu-coursework-bd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@lequeston.github.com:Lequeston/bmstu-coursework-bd.git",
+  "author": "Логачев Кирилл <lequeston@yandex.ru>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --config config/nodemon.json --exec npm run start",
+    "build": "gulp -f ./config/gulpfile.js",
+    "start": "npm run build && node dist/index.js",
+    "test": "jest --config=config/jest.config.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "lodash": "^4.17.21",
+    "log4js": "^6.4.1",
+    "pg": "^8.7.3",
+    "typeorm": "^0.2.45"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.179",
+    "cross-env": "^7.0.3",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.6.2"
+  }
+}
