@@ -1,5 +1,5 @@
 export class QuestionBankService {
-  public addQuestion(id: number, question: string) {
-    
+  public addQuestion(id: number, question: string, sql: string) {
+
   }
 }
