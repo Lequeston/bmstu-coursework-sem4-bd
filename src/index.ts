@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import logger from './config/logger';
-import sqlTestService from './service/SQLTestService';
+import sqlTestService from './services/SQLTestService';
 
 logger.info(process.pid);
 
