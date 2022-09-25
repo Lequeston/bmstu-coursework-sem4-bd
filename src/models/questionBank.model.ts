@@ -1,12 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
 
-@Entity()
-export class QuestionBank {
-  @PrimaryGeneratedColumn("uuid")
-  id: string
+@Entity('question_bank')
+export class QuestionBank extends BaseEntity{
+  @PrimaryGeneratedColumn()
+  id: number
 
   @Column()
-  question: string
+  question_name: string
+
+  @Column()
+  question_text: string
 
   @Column()
   sql: string
