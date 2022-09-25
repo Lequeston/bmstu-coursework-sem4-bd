@@ -24,7 +24,6 @@ export class SQLTestService {
           difference: null
         }
       } else {
-        console.log(res.rows);
         return {
           err: null,
           success: false,
