@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import { getConnectionManager } from 'typeorm';
 
-import QuestionBankService from '../service/QuestionBankService';
+import { QuestionBank } from '../models/questionBank.model';
 
 import logger from '../config/logger';
 
@@ -28,7 +28,7 @@ export const connection = connectionManager.create({
   database: process.env.DB_DATABASE,
   synchronize: true,
   entities: [
-    QuestionBankService
+    QuestionBank
   ],
   logging: false
 });
