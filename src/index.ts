@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import 'reflect-metadata';
 
 import logger from './config/logger';
 import { pool } from './libs/db';
