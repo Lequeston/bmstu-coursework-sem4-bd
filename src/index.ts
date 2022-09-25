@@ -1,18 +1,17 @@
 import 'dotenv/config';
 
 import logger from './config/logger';
-import { pool } from './libs/db';
+import sqlTestService from './service/SQLTestService';
 
 logger.info(process.pid);
 
 const start = async () => {
   try {
     logger.info("Hello, world");
-    const client = await pool.connect();
-    const res = await client.query('SELECT * FROM test');
-    logger.info(res.rows);
-    logger.info(res.fields);
-    logger.info(res.command);
+    const res = await sqlTestService.compare('SELECT FirstName, LastName FROM Customers', 'SELECT FirstName, LastName FROM Employees');
+    logger.info(res);
+    const res2 = await sqlTestService.compare('SELECT FirstName, LastName FROM Customers', 'SELECT FirstName, LastName FROM Customers');
+    logger.info(res2);
   } catch(e) {
     logger.error(e);
   }
