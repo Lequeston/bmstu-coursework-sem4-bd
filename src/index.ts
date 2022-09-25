@@ -1,17 +1,23 @@
 import 'dotenv/config';
+import 'reflect-metadata';
 
+import { connection } from './libs/db';
 import logger from './config/logger';
-import sqlTestService from './services/SQLTestService';
+
+import QuestionBankService from './services/QuestionBankService';
 
 logger.info(process.pid);
 
 const start = async () => {
   try {
-    logger.info("Hello, world");
-    const res = await sqlTestService.compare('SELECT FirstName, LastName FROM Customers', 'SELECT FirstName, LastName FROM Employees');
-    logger.info(res);
-    const res2 = await sqlTestService.compare('SELECT FirstName, LastName FROM Customers', 'SELECT FirstName, LastName FROM Customers');
-    logger.info(res2);
+    await connection.connect();
+    const done = await QuestionBankService.addQuestion(
+      'SQL Главные по работам  зарабатывающие больше, чем их начальник отдела',
+      '[html]<p>Найти главных по работам получающие заработную плату большую,\nчем их начальник отдела<br></p>',
+      'SOME_SQL_CODE'
+    );
+    console.log(`${done}`);
+    await connection.close();
   } catch(e) {
     logger.error(e);
   }
