@@ -1,2 +1,2 @@
 import { QuestionBankService } from './questionBank.service';
-export default new QuestionBankService;
+export default new QuestionBankService();
