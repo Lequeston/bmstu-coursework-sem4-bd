@@ -1,5 +1,4 @@
 import logger from '../../config/logger';
-import { getConnection } from "typeorm";
 import { readFile } from "fs/promises";
 
 import { QuestionBank } from '../../models/questionBank.model';
@@ -21,10 +20,9 @@ export class QuestionBankService {
       if (!await this.addQuestion(question))
         return false;
     return true;
-    
   }
 
-  public async update(): Promise<boolean> {
+  public async updateQuestions(): Promise<boolean> {
     await QuestionBank.clear();
     const file: string = await readFile(`${process.env.PROJECT_ROOT}/src/libs/questions.json`, 'utf8');
     const questions: Question[] = await JSON.parse(file);

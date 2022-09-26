@@ -11,7 +11,7 @@ logger.info(process.pid);
 const start = async () => {
   try {
     await connection.connect();
-    console.log(await QuestionBankService.update() ? "success": "failure");
+    console.log(await QuestionBankService.updateQuestions() ? "success": "failure");
     await connection.close();
   } catch(e) {
     logger.error(e);
