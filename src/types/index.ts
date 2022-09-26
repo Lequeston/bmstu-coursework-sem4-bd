@@ -9,3 +9,10 @@ export type Question = {
   text: string;
   sql: string;
 }
+
+export type Answer = {
+  student: string;
+  question: string;
+  answer: string;
+  rightAnswer: string;
+}

@@ -2,7 +2,7 @@ import logger from '../../config/logger';
 import { readFileSync, writeFileSync } from "fs";
 
 import { QuestionBank } from '../../models/questionBank.model';
-import { Question } from '../../types';
+import { Answer, Question } from '../../types';
 
 export class QuestionBankService {
   public async createMoodleBank(filepath: string): Promise<boolean> {
@@ -18,6 +18,26 @@ export class QuestionBankService {
       logger.error(err);
       return false
     }
+  }
+
+  public parseMoodleAnswers(filepath: string): Answer[] {
+    const answers: Answer[] = []
+    const file: string = readFileSync(filepath, 'utf8');
+    const moodleAnswers: string[][][] = JSON.parse(file);
+
+    moodleAnswers[0].forEach(element => {
+      const studentInfo: string[] = element.splice(0, 13);
+      const student: string = `${studentInfo[0]} ${studentInfo[1]} ${studentInfo[3]}`
+      for (let i: number = 0; i < element.length; i+=3) {
+        answers.push({
+          student,
+          question: element[i],
+          answer: element[i+1],
+          rightAnswer: element[i+2]
+        })
+      }
+    });
+    return answers;
   }
 
   public async addQuestion(question: Question): Promise<boolean> {
