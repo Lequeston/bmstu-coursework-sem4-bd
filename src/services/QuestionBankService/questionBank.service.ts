@@ -5,6 +5,14 @@ import { QuestionBank } from '../../models/questionBank.model';
 import { Answer, Question } from '../../types';
 
 export class QuestionBankService {
+  public async getSQL(text: string): Promise<string> {
+    const response: QuestionBank | undefined = await QuestionBank.findOne({text});
+    if (response)
+      return response.sql
+    logger.error('Cant find SQL by text in Question bank');
+    return '';
+}
+
   public async createMoodleBank(filepath: string): Promise<boolean> {
     let moodleBank: string = "$CATEGORY: $course$/top/По умолчанию для Базы данных/SQL\n\n";
     try {
