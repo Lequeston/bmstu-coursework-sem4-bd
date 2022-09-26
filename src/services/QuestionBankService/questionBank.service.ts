@@ -1,5 +1,5 @@
 import logger from '../../config/logger';
-import { readFile, writeFile } from "fs/promises";
+import { readFileSync, writeFileSync } from "fs";
 
 import { QuestionBank } from '../../models/questionBank.model';
 import { Question } from '../../types';
@@ -12,7 +12,7 @@ export class QuestionBankService {
       questions.forEach(question => {
         moodleBank = `${moodleBank}::${question.name}::${question.text}{}\n\n`;
       });
-      writeFile(filepath, moodleBank);
+      writeFileSync(filepath, moodleBank);
       return true;
     } catch(err) {
       logger.error(err);
@@ -39,7 +39,7 @@ export class QuestionBankService {
 
   public async updateQuestions(): Promise<boolean> {
     await QuestionBank.clear();
-    const file: string = await readFile(`${__dirname}/../../assets/questions.json`, 'utf8');
+    const file: string = readFileSync(`${__dirname}/../../assets/questions.json`, 'utf8');
     const questions: Question[] = await JSON.parse(file);
     return await this.addQuestions(questions);
   }
