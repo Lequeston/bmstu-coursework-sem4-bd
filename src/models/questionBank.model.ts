@@ -6,10 +6,10 @@ export class QuestionBank extends BaseEntity{
   id: number
 
   @Column()
-  question_name: string
+  name: string
 
   @Column()
-  question_text: string
+  text: string
 
   @Column()
   sql: string
