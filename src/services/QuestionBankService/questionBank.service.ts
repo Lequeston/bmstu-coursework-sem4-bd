@@ -1,10 +1,25 @@
 import logger from '../../config/logger';
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 
 import { QuestionBank } from '../../models/questionBank.model';
 import { Question } from '../../types';
 
 export class QuestionBankService {
+  public async createMoodleBank(filepath: string): Promise<boolean> {
+    let moodleBank: string = "$CATEGORY: $course$/top/По умолчанию для Базы данных/SQL\n\n";
+    try {
+      const questions: QuestionBank[] = await QuestionBank.find();
+      questions.forEach(question => {
+        moodleBank = `${moodleBank}::${question.name}::${question.text}{}\n\n`;
+      });
+      writeFile(filepath, moodleBank);
+      return true;
+    } catch(err) {
+      logger.error(err);
+      return false
+    }
+  }
+
   public async addQuestion(question: Question): Promise<boolean> {
     try {
       await QuestionBank.create(question).save();
@@ -24,13 +39,8 @@ export class QuestionBankService {
 
   public async updateQuestions(): Promise<boolean> {
     await QuestionBank.clear();
-    const file: string = await readFile(`${__dirname}/../../src/libs/questions.json`, 'utf8');
-    let questions: Question[] = [];
-    try {
-      questions = await JSON.parse(file);
-    } catch(err) {
-      logger.error(err);
-    }
+    const file: string = await readFile(`${process.env.PROJECT_ROOT}/src/libs/questions.json`, 'utf8');
+    const questions: Question[] = await JSON.parse(file);
     return await this.addQuestions(questions);
   }
 }

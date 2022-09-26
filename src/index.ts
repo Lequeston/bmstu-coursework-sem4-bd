@@ -12,6 +12,7 @@ const start = async () => {
   try {
     await connection.connect();
     console.log(await QuestionBankService.updateQuestions() ? "success": "failure");
+    console.log(await QuestionBankService.createMoodleBank(`/home/fummie/moodle.txt`) ? "success": "failure");
     await connection.close();
   } catch(e) {
     logger.error(e);
