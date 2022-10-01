@@ -16,7 +16,7 @@ const start = async () => {
   try {
     await connection.connect();
 
-    await QuestionBankService.updateQuestions() ?
+    await QuestionBankService.updateQuestions(`/home/fummie/Downloads/bank.json`) ?
       logger.info('Questions are updated') :
       logger.error('Error on question update');
 

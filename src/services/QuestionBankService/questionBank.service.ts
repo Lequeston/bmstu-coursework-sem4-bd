@@ -65,9 +65,9 @@ export class QuestionBankService {
     return true;
   }
 
-  public async updateQuestions(): Promise<boolean> {
+  public async updateQuestions(filepath: string): Promise<boolean> {
     await QuestionBank.clear();
-    const file: string = readFileSync(`${__dirname}/../../assets/questions.json`, 'utf8');
+    const file: string = readFileSync(filepath, 'utf8');
     const questions: Question[] = await JSON.parse(file);
     return await this.addQuestions(questions);
   }
