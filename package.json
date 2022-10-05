@@ -13,13 +13,16 @@
     "test": "jest --config=config/jest.config.js"
   },
   "dependencies": {
+    "commander": "^9.4.1",
     "dotenv": "^16.0.0",
+    "inquirer": "^9.1.2",
     "lodash": "^4.17.21",
     "log4js": "^6.4.1",
     "pg": "^8.7.3",
     "typeorm": "^0.2.45"
   },
   "devDependencies": {
+    "@types/inquirer": "^9.0.2",
     "@types/lodash": "^4.14.179",
     "@types/pg": "^8.6.5",
     "cross-env": "^7.0.3",
